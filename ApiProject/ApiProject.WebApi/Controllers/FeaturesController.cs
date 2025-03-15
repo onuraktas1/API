@@ -14,9 +14,10 @@ namespace ApiProject.WebApi.Controllers
         private readonly IMapper _mapper;
         private readonly ApiContext _context;
 
-        public FeaturesController(IMapper mapper)
+        public FeaturesController(IMapper mapper, ApiContext context)
         {
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -31,6 +32,7 @@ namespace ApiProject.WebApi.Controllers
         {
             var value = _mapper.Map<Feature>(createFeatureDto);
             _context.Features.Add(value);
+            _context.SaveChanges();
             return Ok("Ekleme Başarılı");
         }
 
@@ -39,6 +41,7 @@ namespace ApiProject.WebApi.Controllers
         {
             var value = _context.Features.Find(id);
             _context.Features.Remove(value);
+            _context.SaveChanges();
             return Ok("Silme işlemi başarılı");
         }
 
@@ -55,6 +58,7 @@ namespace ApiProject.WebApi.Controllers
         {
             var value = _mapper.Map<Feature>(updateFeatureDto);
             _context.Features.Update(value);
+            _context.SaveChanges();
             return Ok("Güncelleme Başarılı");
 
         }
