@@ -41,5 +41,36 @@ namespace ApiProject.WebApi.Controllers
                 return Ok("ürün ekleme başarılı");
             }
         }
+
+        [HttpDelete]
+        public IActionResult DeleteProduct(int id)
+        {
+            var value = _context.Products.Find(id);
+            _context.Products.Remove(value);
+            return Ok("Ürün başarıyla silindi");
+        }
+
+        [HttpGet("GetProduct")]
+        public IActionResult GetProduct(int id)
+        {
+            var value = _context.Products.Find(id);
+            return Ok(value);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateProduct(Product product)
+        {
+            var validationResult = _validator.Validate(product);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage));
+            }
+            else
+            {
+                _context.Products.Update(product);
+                _context.SaveChanges();
+                return Ok("ürün güncelleme başarılı");
+            }
+        }
     }
 }
