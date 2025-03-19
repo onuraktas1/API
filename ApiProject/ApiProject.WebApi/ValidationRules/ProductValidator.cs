@@ -18,7 +18,7 @@ namespace ApiProject.WebApi.ValidationRules
             RuleFor(x => x.Price)
                 .NotEmpty()
                 .WithMessage("Ürün fiyatı boş geçilemez")
-                .LessThan(0)
+                .GreaterThan(0)
                 .WithMessage("Ürün fiyatı negatif değer olamaz");
 
         }
