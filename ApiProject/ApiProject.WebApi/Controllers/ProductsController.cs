@@ -92,7 +92,7 @@ namespace ApiProject.WebApi.Controllers
         public IActionResult ProductListWithCategory()
         {
             var value = _context.Products.Include(x => x.Category).ToList();
-            return Ok(value);
+            return Ok(_mapper.Map<List<ResultProductWithCategoryDto>>(value));
         }
     }
 }
