@@ -7,7 +7,8 @@ namespace ApiProject.WebApi.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=ApiYummyDb;Trusted_Connection=True;TrustServerCertificate=true");
+            // optionsBuilder.UseSqlServer("Server=.;Database=ApiYummyDb;Trusted_Connection=True;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=ApiYummyDb;User Id=SA;Password=Onuraktas1234;TrustServerCertificate=True;");
         }
 
         public DbSet<Category> Categories { get; set; }
